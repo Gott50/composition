@@ -1,11 +1,13 @@
 version: '3'
 services:
   manager:
-    build: .
+    build:
+      context: ./manager
+      dockerfile: ./Dockerfile
     ports:
       - "5000:5000"
     volumes:
-      - .:/app
+      - ./manager:/app
     restart: always
     depends_on:
       - postgres
