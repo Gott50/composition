@@ -45,7 +45,7 @@ services:
     depends_on:
       - selenium
     volumes:
-      - ./logs:/code/logs
+      - ./bot/logs:/code/logs
   selenium:
     container_name: selenium
     image: selenium/standalone-chrome-debug
