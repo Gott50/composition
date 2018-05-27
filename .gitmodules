@@ -1,7 +1,6 @@
 [submodule "bot"]
 	path = bot
 	url = https://github.com/Instagram-Tools/bot
-
 [submodule "manager"]
 	path = manager
 	url = https://github.com/Instagram-Tools/manager
