@@ -53,5 +53,42 @@ services:
       - "5900:5900"
     shm_size: 128M
 
+  nginx:
+     restart: always
+     build: ./user-interface/nginx
+     ports:
+       - "80:80"
+       - "60:60"
+     volumes:
+       - ./user-interface/build:/usr/static
+
+  api:
+      command: /usr/local/bin/gunicorn -w 2 -b :6000 server
+      build:
+        context: ./user-interface/api
+        dockerfile: ./Dockerfile
+      ports:
+        - "6000:6000"
+      volumes:
+        - ./user-interface/api:/app
+      restart: always
+      depends_on:
+        - postgres
+      links:
+        - postgres:postgres
+      environment:
+        - DEBUG=True
+        - SECRET_KEY=5(15ds+i2+%ik6z&!yer+ga9m=e%jcqiz_5wszg)r-z!2--b2d
+        - DB_NAME=postgres
+        - DB_USER=postgres
+        - DB_PASS=postgres
+        - DB_SERVICE=postgres
+        - DB_PORT=5432
+        - PATH_TO_SSH_KEY=tk
+        - SSH_PORT=tk
+        - IP=tk
+        - SECURITY_PASSWORD_SALT=tk
+
+
 volumes:
   db_data:
