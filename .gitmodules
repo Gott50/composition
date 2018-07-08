@@ -4,3 +4,9 @@
 [submodule "manager"]
 	path = manager
 	url = https://github.com/Instagram-Tools/manager.git
+[submodule "api"]
+	path = api
+	url = https://github.com/Instagram-Tools/api.git
+[submodule "user-interface"]
+	path = user-interface
+	url = https://github.com/Instagram-Tools/user-interface.git
