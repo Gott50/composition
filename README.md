@@ -5,4 +5,4 @@
     docker-compose run manager python create_db.py
 
 ## update Submodules
-    git submodule update --remote  
+    git submodule update --remote --recursive
