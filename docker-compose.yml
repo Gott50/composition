@@ -57,9 +57,9 @@ services:
 
   api:
       restart: always
-      image: instagramtools/user-interface
+      image: instagramtools/api
       ports:
-        - "6000:6000"
+        - "5000:5000"
       depends_on:
         - postgres
       links:
