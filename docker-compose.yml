@@ -34,7 +34,7 @@ services:
     depends_on:
       - selenium
     volumes:
-      - /var/data/instapy/logs:/code/logs
+      - log_data:/code/logs
   selenium:
     restart: always
     container_name: selenium
@@ -71,3 +71,4 @@ services:
 
 volumes:
   db_data:
+  log_data:
