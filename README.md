@@ -6,3 +6,9 @@
 
 ## update Submodules
     git submodule update --remote --recursive
+    
+## add .env Files
+### .postgres.env
+    DB_NAME=postgres
+    DB_USER=postgres
+    DB_PASS=postgres

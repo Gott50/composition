@@ -12,14 +12,13 @@ services:
     environment:
       - DEBUG=True
       - SECRET_KEY=5(15ds+i2+%ik6z&!yer+ga9m=e%jcqiz_5wszg)r-z!2--b2d
-      - DB_NAME=postgres
-      - DB_USER=postgres
-      - DB_PASS=postgres
       - DB_SERVICE=postgres
       - DB_PORT=5432
       - PATH_TO_SSH_KEY=tk
       - SSH_PORT=tk
       - IP=tk
+    env_file:
+    - .postgres.env
   postgres:
     restart: always
     image: postgres:10
@@ -27,10 +26,8 @@ services:
       - db_data:/var/lib/postgresql
     ports:
       - "5432:5432"
-    environment:
-      - DB_NAME=postgres
-      - DB_USER=postgres
-      - DB_PASS=postgres
+    env_file:
+      - .postgres.env
 
   web:
     image: gott50/bot
@@ -66,16 +63,14 @@ services:
       environment:
         - DEBUG=True
         - SECRET_KEY=5(15ds+i2+%ik6z&!yer+ga9m=e%jcqiz_5wszg)r-z!2--b2d
-        - DB_NAME=postgres
-        - DB_USER=postgres
-        - DB_PASS=postgres
         - DB_SERVICE=postgres
         - DB_PORT=5432
         - PATH_TO_SSH_KEY=tk
         - SSH_PORT=tk
         - IP=tk
         - SECURITY_PASSWORD_SALT=tk
-
+      env_file:
+      - .postgres.env
 
 volumes:
   db_data:
