@@ -47,6 +47,8 @@ services:
      image: instagramtools/user-interface
      ports:
        - "80:80"
+     env_file:
+     - .nginx.env
 
   api:
       restart: always

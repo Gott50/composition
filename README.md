@@ -19,3 +19,15 @@
     SSH_PORT=tk
     IP=tk
     SECURITY_PASSWORD_SALT=tk
+
+### .nginx.env
+    DEBUG=off
+    APP_DIR=/app
+    APP_PATH_PREFIX=/aSubSiteInParentDomainUseThisPath
+    APP_API_PLACEHOLDER=/allRequestStartOfthisPathIsAnApiCall
+    APP_API_GATEWAY="https://api.36node.com"
+    CLIENT_BODY_TIMEOUT=10
+    CLIENT_HEADER_TIMEOUT=10
+    CLIENT_MAX_BODY_SIZE=1024
+    WHITE_LIST_IP=(172.17.0.1)|(192.168.0.25)
+    WHITE_LIST=off
