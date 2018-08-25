@@ -10,7 +10,7 @@ services:
     links:
       - postgres:postgres
     environment:
-      - DEBUG=True
+      - DEBUG=False
       - DB_SERVICE=postgres
       - DB_PORT=5432
     env_file:
@@ -47,6 +47,8 @@ services:
      image: instagramtools/user-interface
      ports:
        - "80:80"
+     environment:
+       - DEBUG=off
      env_file:
      - .nginx.env
 
@@ -60,7 +62,7 @@ services:
       links:
         - postgres:postgres
       environment:
-        - DEBUG=True
+        - DEBUG=False
         - DB_SERVICE=postgres
         - DB_PORT=5432
       env_file:
