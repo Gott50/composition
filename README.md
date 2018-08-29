@@ -12,6 +12,11 @@
     DB_NAME=postgres
     DB_USER=postgres
     DB_PASS=postgres
+    
+### .manager.env
+    PATH_TO_SSH_KEY=tk
+    SSH_PORT=tk
+    IP=tk
 
 ### .api.env
     SECRET_KEY=5(15ds+i2+%ik6z&!yer+ga9m=e%jcqiz_5wszg)r-z!2--b2d

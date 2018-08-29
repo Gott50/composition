@@ -16,6 +16,7 @@ services:
     env_file:
     - .postgres.env
     - .api.env
+    - .manager.env
   postgres:
     restart: always
     image: postgres:10
