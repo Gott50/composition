@@ -14,9 +14,9 @@ services:
       - DB_SERVICE=postgres
       - DB_PORT=5432
     env_file:
-    - .postgres.env
-    - .api.env
-    - .manager.env
+    - .env/.postgres.env
+    - .env/.api.env
+    - .env/.manager.env
   postgres:
     restart: always
     image: postgres:10
@@ -25,7 +25,7 @@ services:
     ports:
       - "5432:5432"
     env_file:
-      - .postgres.env
+      - .env/.postgres.env
 
   web:
     image: instagramtools/web
@@ -51,7 +51,7 @@ services:
      environment:
        - DEBUG=off
      env_file:
-     - .nginx.env
+       - .env/.nginx.env
 
   api:
       restart: always
@@ -67,8 +67,8 @@ services:
         - DB_SERVICE=postgres
         - DB_PORT=5432
       env_file:
-      - .postgres.env
-      - .api.env
+      - .env/.postgres.env
+      - .env/.api.env
 
 volumes:
   db_data:
