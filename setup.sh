@@ -6,6 +6,7 @@ MANAGER_IP=$(docker-machine ip manager1)
 
 docker-machine ssh manager1 "docker swarm init --advertise-addr $MANAGER_IP"
 docker-machine scp docker-compose.yml manager1:
+docker-machine scp .env/ manager1:
 docker-machine ssh manager1 <<-'END_SSH'
     docker stack deploy --compose-file docker-compose.yml manager1
 END_SSH
