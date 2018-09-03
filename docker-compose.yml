@@ -31,8 +31,7 @@ services:
     restart: always
     container_name: selenium
     image: selenium/standalone-chrome
-    ports:
-      - "5900:5900"
+    shm_size: 128M
 
   nginx:
      restart: always
