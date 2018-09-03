@@ -38,6 +38,7 @@ services:
      image: instagramtools/user-interface
      ports:
        - "80:80"
+       - "443:443"
      environment:
        - DEBUG=off
      env_file:
