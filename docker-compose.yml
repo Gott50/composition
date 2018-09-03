@@ -27,15 +27,6 @@ services:
     env_file:
       - .env/.postgres.env
 
-  web:
-    image: instagramtools/web
-    command: ["./wait-for-selenium.sh", "http://selenium:4444/wd/hub", "--", "python", "docker_quickstart.py"]
-    environment:
-      - PYTHONUNBUFFERED=0
-    depends_on:
-      - selenium
-    volumes:
-      - log_data:/code/logs
   selenium:
     restart: always
     container_name: selenium
