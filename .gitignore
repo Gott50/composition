@@ -98,3 +98,7 @@ ENV/
 
 # Docker
 docker-compose.override.yml
+
+
+# ShellScripts
+*.sh
