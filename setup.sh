@@ -13,9 +13,7 @@ mkdir .env
 echo "IP=$MANAGER_IP
 SSH_KEY=$SSH_KEY" > .env/.manager.env
 
-docker-machine ssh $name "docker swarm init --advertise-addr $MANAGER_IP"
+docker-machine ssh $name "sudo docker swarm init --advertise-addr $MANAGER_IP"
 docker-machine scp docker-compose.yml $name:
 docker-machine scp -r .env/ $name:
-docker-machine ssh $name <<-'END_SSH'
-    docker stack deploy --compose-file docker-compose.yml $name
-END_SSH
+docker-machine ssh $name "sudo docker stack deploy --compose-file docker-compose.yml $name"
