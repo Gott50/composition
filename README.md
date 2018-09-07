@@ -1,3 +1,11 @@
+## Setup
+    sh setup.sh <driver> [OPTIONS] <name> 
+
+### Drivers
+- virtualbox
+- [azure](https://docs.docker.com/machine/drivers/azure/)
+- [amazonec2](https://docs.docker.com/machine/drivers/aws/#default-amis)
+
 ## Start Services
     docker-compose up
 
