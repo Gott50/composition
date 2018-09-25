@@ -19,8 +19,7 @@ services:
     - .env/.api.env
     - .env/.manager.env
   postgres:
-    restart: always
-    image: postgres:10
+    image: postgres:10.5-alpine
     volumes:
       - db_data:/var/lib/postgresql
     ports:
