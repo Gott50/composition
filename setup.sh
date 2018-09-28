@@ -7,7 +7,7 @@ eval "$(docker-machine env $name)"
 
 id_rsa=$(cat $DOCKER_CERT_PATH/id_rsa)
 SSH_KEY=${id_rsa//
-/**}
+/_}
 
 mkdir .env
 echo "IP=$MANAGER_IP
