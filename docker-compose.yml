@@ -1,5 +1,28 @@
 version: "3"
 services:
+  postgres:
+    image: postgres:10.5-alpine
+    volumes:
+      - db_data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env/.postgres.env
+  api:
+      image: instagramtools/api
+      ports:
+        - "8000:8000"
+      depends_on:
+        - postgres
+      links:
+        - postgres:postgres
+      environment:
+        - DEBUG=False
+        - DB_SERVICE=postgres
+        - DB_PORT=5432
+      env_file:
+      - .env/.postgres.env
+      - .env/.api.env
   manager:
     image: instagramtools/manager
     command: sh wait-for.sh http://api:8000 -- python start.py
@@ -18,14 +41,6 @@ services:
     - .env/.postgres.env
     - .env/.api.env
     - .env/.manager.env
-  postgres:
-    image: postgres:10.5-alpine
-    volumes:
-      - db_data:/var/lib/postgresql
-    ports:
-      - "5432:5432"
-    env_file:
-      - .env/.postgres.env
 
   selenium:
     container_name: selenium
@@ -41,22 +56,6 @@ services:
        - DEBUG=off
      env_file:
        - .env/.nginx.env
-
-  api:
-      image: instagramtools/api
-      ports:
-        - "8000:8000"
-      depends_on:
-        - postgres
-      links:
-        - postgres:postgres
-      environment:
-        - DEBUG=False
-        - DB_SERVICE=postgres
-        - DB_PORT=5432
-      env_file:
-      - .env/.postgres.env
-      - .env/.api.env
 
 volumes:
   db_data:
