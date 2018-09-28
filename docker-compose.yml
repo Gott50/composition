@@ -1,7 +1,6 @@
 version: "3"
 services:
   manager:
-    restart: always
     image: instagramtools/manager
     command: sh wait-for.sh http://api:8000 -- python start.py
     ports:
@@ -29,13 +28,11 @@ services:
       - .env/.postgres.env
 
   selenium:
-    restart: always
     container_name: selenium
     image: selenium/standalone-chrome
     shm_size: 128M
 
   nginx:
-     restart: always
      image: instagramtools/user-interface
      ports:
        - "80:80"
@@ -46,7 +43,6 @@ services:
        - .env/.nginx.env
 
   api:
-      restart: always
       image: instagramtools/api
       ports:
         - "8000:8000"
