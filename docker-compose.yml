@@ -33,8 +33,6 @@ services:
       - api
     links:
       - postgres:postgres
-    networks:
-      - bots
     environment:
       - DEBUG=False
       - DB_SERVICE=postgres
@@ -48,6 +46,8 @@ services:
     container_name: selenium
     image: selenium/standalone-chrome
     shm_size: 128M
+    networks:
+      - bots
 
   nginx:
      image: instagramtools/user-interface
