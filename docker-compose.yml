@@ -33,6 +33,8 @@ services:
       - api
     links:
       - postgres:postgres
+    networks:
+      - bots
     environment:
       - DEBUG=False
       - DB_SERVICE=postgres
@@ -56,6 +58,9 @@ services:
        - DEBUG=off
      env_file:
        - .env/.nginx.env
+
+networks:
+  bots:
 
 volumes:
   db_data:
