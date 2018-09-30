@@ -20,4 +20,5 @@ KNOWN_HOSTS=$(grep $MANAGER_IP ~/.ssh/known_hosts)" > .env/.manager.env
 docker-machine ssh $name "sudo docker swarm init --advertise-addr $MANAGER_IP"
 docker-machine scp docker-compose.yml $name:
 docker-machine scp -r .env/ $name:
+docker-machine scp start_bot.sh $name:
 docker-machine ssh $name "sudo docker stack deploy --compose-file docker-compose.yml $name"
