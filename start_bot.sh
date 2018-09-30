@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo Parameters: $@
+
 sudo docker stop /$1
 sudo docker rm /$1
 
