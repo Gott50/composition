@@ -6,7 +6,7 @@ MANAGER_IP=$(docker-machine ip $name)
 eval "$(docker-machine env $name)"
 
 ssh -i $DOCKER_CERT_PATH/id_rsa docker@$MANAGER_IP echo "ssh works!"
-sed -i '/$MANAGER_IP/d' ~/.ssh/known_hosts
+sed -i /$MANAGER_IP/d ~/.ssh/known_hosts
 
 id_rsa=$(cat $DOCKER_CERT_PATH/id_rsa)
 SSH_KEY=${id_rsa//
