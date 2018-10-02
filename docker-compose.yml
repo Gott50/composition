@@ -46,8 +46,6 @@ services:
     shm_size: 128M
     ports:
       - "4444:4444"
-    networks:
-      - bots
 
   nginx:
      image: instagramtools/user-interface
@@ -58,9 +56,6 @@ services:
        - DEBUG=off
      env_file:
        - .env/.nginx.env
-
-networks:
-  bots:
 
 volumes:
   db_data:
