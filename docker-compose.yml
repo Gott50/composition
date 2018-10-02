@@ -26,8 +26,6 @@ services:
   manager:
     image: instagramtools/manager
     command: sh wait-for.sh http://api:8000 python start.py
-    ports:
-      - "5000:5000"
     depends_on:
       - postgres
       - api
