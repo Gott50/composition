@@ -8,4 +8,4 @@ sudo docker rm /$1
 NODE=$(docker info | grep "Node Address")
 SELENIUM=${NODE/' Node Address: '/''}
 
-sudo docker run -d --name $1 -e SELENIUM=$SELENIUM -e INSTA_USER=$1 -e INSTA_PW=$2 -e ENV=$3 -v log_data:/code/logs instagramtools/web
+sudo docker run -d --name $1 -e SELENIUM=$SELENIUM -e ENV=$1 -e INSTA_USER=$2 -e INSTA_PW=$3 -e PROXY=$4 -v log_data:/code/logs instagramtools/web
