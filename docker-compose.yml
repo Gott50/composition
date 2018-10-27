@@ -27,8 +27,10 @@ services:
     depends_on:
       - postgres
       - api
+      - proxy-manager
     links:
       - postgres:postgres
+      - proxy-manager:proxy-manager
     environment:
       - DEBUG=False
       - DB_SERVICE=postgres
