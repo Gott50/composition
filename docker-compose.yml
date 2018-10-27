@@ -59,6 +59,15 @@ services:
     links:
     - api:api
 
+  proxy-manager:
+    image: gott50/proxy-manager
+    ports:
+    - "60000:60000"
+    environment:
+    - DEBUG=False
+    env_file:
+    - .env/.proxy-manager.env
+
 volumes:
   db_data:
   log_data:
