@@ -6,7 +6,7 @@ INSTA_USER=$2
 sudo docker stop /$INSTA_USER
 sudo docker rm /$INSTA_USER
 
-NODE=$(docker info | grep "Node Address")
+NODE=$(sudo docker info | grep "Node Address")
 SELENIUM=${NODE/' Node Address: '/''}
 
 
