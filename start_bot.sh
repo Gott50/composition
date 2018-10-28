@@ -1,11 +1,13 @@
 #!/bin/sh
 
 echo Parameters: $@
+INSTA_USER=$2
 
-sudo docker stop /$1
-sudo docker rm /$1
+sudo docker stop /$INSTA_USER
+sudo docker rm /$INSTA_USER
 
 NODE=$(docker info | grep "Node Address")
 SELENIUM=${NODE/' Node Address: '/''}
 
-sudo docker run -d --name $1 -e SELENIUM=$SELENIUM -e ENV=$1 -e INSTA_USER=$2 -e INSTA_PW=$3 -e PROXY=$4 -v log_data:/code/logs instagramtools/web
+
+sudo docker run -d --name $INSTA_USER -e SELENIUM=$SELENIUM -e ENV=$1 -e INSTA_USER=$INSTA_USER -e INSTA_PW=$3 -e PROXY=$4 -v log_data:/code/logs instagramtools/web
