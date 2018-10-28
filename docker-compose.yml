@@ -34,6 +34,7 @@ services:
       - DEBUG=False
       - DB_SERVICE=postgres
       - DB_PORT=5432
+      - P_USER=ubuntu
     env_file:
     - .env/.postgres.env
     - .env/.api.env
