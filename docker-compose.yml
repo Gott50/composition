@@ -35,6 +35,7 @@ services:
       - DB_SERVICE=postgres
       - DB_PORT=5432
       - P_USER=ubuntu
+      - UPDATE=666
     env_file:
     - .env/.postgres.env
     - .env/.api.env
@@ -58,8 +59,17 @@ services:
      - .env/.nginx.env
     depends_on:
     - api
+    - payment-manager
     links:
     - api:api
+    - payment-manager:payment-manager
+
+  payment-manager:
+    image: instagramtools/payment-manager
+    ports:
+    - "7000:7000"
+    env_file:
+    - .env/.payment-manager.env
 
   proxy-manager:
     image: gott50/proxy-manager
