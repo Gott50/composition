@@ -66,10 +66,15 @@ services:
 
   payment-manager:
     image: instagramtools/payment-manager
+    depends_on:
+    - postgres
+    links:
+    - postgres:postgres
     ports:
     - "7000:7000"
     env_file:
     - .env/.payment-manager.env
+    - .env/.postgres.env
 
   proxy-manager:
     image: gott50/proxy-manager
