@@ -66,10 +66,13 @@ services:
 
   payment-manager:
     image: instagramtools/payment-manager
+    command: sh wait-for.sh http://api:8000 python start.py
     depends_on:
     - postgres
+    - api
     links:
     - postgres:postgres
+    - api:api
     ports:
     - "7000:7000"
     env_file:
