@@ -2,4 +2,4 @@
 
 docker-machine start dev
 
-sh setup.sh virtualbox dev
+sh setup.sh docker virtualbox dev
