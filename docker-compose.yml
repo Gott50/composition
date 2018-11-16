@@ -35,7 +35,6 @@ services:
       - DB_SERVICE=postgres
       - DB_PORT=5432
       - P_USER=ubuntu
-      - UPDATE=666
     env_file:
     - .env/.postgres.env
     - .env/.api.env
