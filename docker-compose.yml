@@ -24,7 +24,7 @@ services:
       - .env/.api.env
   manager:
     image: instagramtools/manager
-    command: sh wait-for.sh http://api:8000 sh start.sh
+    command: sh wait-for.sh http://api:8000 sh start.sh 8765
     depends_on:
       - postgres
       - api
