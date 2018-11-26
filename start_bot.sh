@@ -3,7 +3,9 @@
 echo Parameters: $@
 INSTA_USER=$2
 
+echo "sudo docker stop /$INSTA_USER"
 sudo docker stop /$INSTA_USER
+echo "sudo docker rm /$INSTA_USER"
 sudo docker rm /$INSTA_USER
 
 NODE=$(sudo docker info | grep "Node Address")
