@@ -14,7 +14,7 @@ SELENIUM=${NODE/' Node Address: '/''}
 # should be
 # 18.197.130.112
 
-CMD="sudo docker run -d -e SELENIUM=18.197.130.112 --name \"$INSTA_USER\" -e ENV=\"$1\" -e INSTA_USER=\"$INSTA_USER\" -e INSTA_PW=\"$3\" -e PROXY=$4 -v log_data:/code/logs instagramtools/web"
+CMD="sudo docker run -d -e SELENIUM=18.197.130.112 --name $INSTA_USER -e ENV=$1 -e INSTA_USER=$INSTA_USER -e INSTA_PW=$3 -e PROXY=$4 -v log_data:/code/logs instagramtools/web"
 echo Composition CMD: $CMD
 
 $CMD
