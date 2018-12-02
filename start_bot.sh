@@ -8,7 +8,7 @@ sudo docker stop /$INSTA_USER
 echo "Composition sudo docker rm /$INSTA_USER"
 sudo docker rm /$INSTA_USER
 
-SETTINGS=${1/' '//''}
+SETTINGS=${1//' '/''}
 
 NODE=$(sudo docker info | grep "Node Address")
 SELENIUM=${NODE/' Node Address: '/''}
