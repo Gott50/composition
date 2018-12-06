@@ -63,9 +63,11 @@ services:
     depends_on:
     - api
     - payment-manager
+    - manager
     links:
     - api:api
     - payment-manager:payment-manager
+    - manager:manager
 
   payment-manager:
     image: instagramtools/payment-manager
