@@ -18,7 +18,6 @@ services:
         - DEBUG=False
         - DB_SERVICE=postgres
         - DB_PORT=5432
-        - UPDATE=1
       env_file:
       - .env/.postgres.env
       - .env/.api.env
@@ -38,7 +37,6 @@ services:
       - DB_SERVICE=postgres
       - DB_PORT=5432
       - P_USER=ubuntu
-      - UPDATE=1
     env_file:
     - .env/.postgres.env
     - .env/.api.env
