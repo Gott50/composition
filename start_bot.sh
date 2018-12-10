@@ -16,7 +16,7 @@ SELENIUM=${NODE/' Node Address: '/''}
 # should be
 # 18.197.130.112
 
-CMD="docker-compose run -d -e SELENIUM=selenium --name $INSTA_USER -e ENV=$SETTINGS -e INSTA_USER=$INSTA_USER -e INSTA_PW=$3 -v log_data:/code/logs web"
+CMD="docker-compose run -d -e SELENIUM=selenium --name $INSTA_USER -e ENV=$SETTINGS -e INSTA_USER=$INSTA_USER -e INSTA_PW=$3 web"
 echo Composition CMD: $CMD
 
 $CMD
