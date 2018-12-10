@@ -102,3 +102,4 @@ docker-compose.override.yml
 
 # ShellScripts
 *.sh
+backup/

@@ -29,6 +29,18 @@ KNOWN_HOSTS=$KNOWN_HOSTS" > .env/.manager.env
 
 echo ".manager.env: $(cat .env/.manager.env)"
 
+
+docker-machine ssh $name "mkdir backup"
+docker-machine scp dcp.sh $name:~/backup/
+docker-machine ssh $name <<-'ENDBACKUP'
+    DATE=`date '+%Y-%m-%d'`
+    CONTAINER=$(sudo docker ps -f NAME=postgres --format 'table {{.ID}}' | grep -v -w CONTAINER)
+    cd backup
+    sudo ./dcp.sh $CONTAINER:/var/lib/postgresql/data .
+    sudo chmod -R 777 data
+    mv data $DATE
+ENDBACKUP
+
 docker-machine ssh $name "sudo docker swarm init --advertise-addr $MANAGER_IP"
 docker-machine scp docker-prod.yml $name:
 docker-machine scp -r .env/ $name:
@@ -38,3 +50,7 @@ docker-machine ssh $name "sudo docker stack deploy --compose-file docker-prod.ym
 
 docker-machine scp docker-compose.yml $name:
 docker-machine ssh $name "sudo apt install docker-compose"
+
+
+DATE=`date '+%Y-%m-%d'`
+docker-machine scp -r $name:backup/$DATE backup/
