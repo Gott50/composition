@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:11.1-alpine
     volumes:
-      - db_data:/var/lib/postgresql
+      - pgs_data:/var/lib/postgresql/data
     env_file:
       - .env/.postgres.env
     ports:
@@ -93,5 +93,5 @@ services:
     - .env/.proxy-manager.env
 
 volumes:
-  db_data:
+  pgs_data:
   log_data:
