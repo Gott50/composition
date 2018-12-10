@@ -36,9 +36,9 @@ docker-machine ssh $name <<-'ENDBACKUP'
     DATE=`date '+%Y-%m-%d'`
     CONTAINER=$(sudo docker ps -f NAME=postgres --format 'table {{.ID}}' | grep -v -w CONTAINER)
     cd backup
-    sudo ./dcp.sh $CONTAINER:/var/lib/postgresql/data .
-    sudo chmod -R 777 data
-    mv data $DATE
+    sudo docker exec $CONTAINER pg_dump --dbname=postgres --schema=public --format=t --file=/tmp/pg_dump_$DATE.tar --username=postgres
+    sudo ./dcp.sh $CONTAINER:/tmp/pg_dump_$DATE.tar .
+    sudo chmod 777 pg_dump_$DATE.tar
 ENDBACKUP
 
 docker-machine ssh $name "sudo docker swarm init --advertise-addr $MANAGER_IP"
@@ -53,4 +53,4 @@ docker-machine ssh $name "sudo apt install docker-compose"
 
 
 DATE=`date '+%Y-%m-%d'`
-docker-machine scp -r $name:backup/$DATE backup/
+docker-machine scp -r $name:backup/pg_dump_$DATE.tar backup/
