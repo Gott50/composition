@@ -12,5 +12,15 @@ services:
       - PYTHONUNBUFFERED=0
     depends_on:
       - selenium
+      - proxy-manager
+    links:
+      - proxy-manager:proxy-manager
     volumes:
       - ./logs:/code/logs
+
+  proxy-manager:
+    image: gott50/proxy-manager
+    environment:
+      - DEBUG=False
+    env_file:
+      - .env/.proxy-manager.env
