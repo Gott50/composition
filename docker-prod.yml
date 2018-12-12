@@ -27,11 +27,9 @@ services:
     depends_on:
       - postgres
       - api
-      - proxy-manager
     links:
       - postgres:postgres
       - api:api
-      - proxy-manager:proxy-manager
     environment:
       - DEBUG=False
       - DB_SERVICE=postgres
@@ -41,13 +39,6 @@ services:
     - .env/.postgres.env
     - .env/.api.env
     - .env/.manager.env
-
-  selenium:
-    container_name: selenium
-    image: selenium/standalone-chrome
-    shm_size: 128M
-    ports:
-      - "4444:4444"
 
   nginx:
     image: instagramtools/user-interface
@@ -85,13 +76,5 @@ services:
     - .env/.payment-manager.env
     - .env/.postgres.env
 
-  proxy-manager:
-    image: gott50/proxy-manager
-    environment:
-    - DEBUG=False
-    env_file:
-    - .env/.proxy-manager.env
-
 volumes:
   pgs_data:
-  log_data:
