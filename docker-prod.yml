@@ -34,11 +34,12 @@ services:
       - DEBUG=False
       - DB_SERVICE=postgres
       - DB_PORT=5432
-      - P_USER=ubuntu
+      - P_USER=ec2-user
     env_file:
     - .env/.postgres.env
     - .env/.api.env
     - .env/.manager.env
+    - .env/.bot-manager.env
 
   nginx:
     image: instagramtools/user-interface

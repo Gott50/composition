@@ -15,17 +15,12 @@ CMD="ssh -i $DOCKER_CERT_PATH/id_rsa $P_USER@$MANAGER_IP echo ssh works!"
 echo CMD=$CMD
 $CMD
 
-KNOWN_HOSTS=$(grep $MANAGER_IP ~/.ssh/known_hosts)
-sed -i /$MANAGER_IP/d ~/.ssh/known_hosts
-
-id_rsa=$(cat $DOCKER_CERT_PATH/id_rsa)
+id_rsa=$(cat ./bot.pem)
 SSH_KEY=${id_rsa//
 /_}
 
 mkdir .env
-echo "IP=$MANAGER_IP
-SSH_KEY=$SSH_KEY
-KNOWN_HOSTS=$KNOWN_HOSTS" > .env/.manager.env
+echo "SSH_KEY=$SSH_KEY" > .env/.manager.env
 
 echo ".manager.env: $(cat .env/.manager.env)"
 
