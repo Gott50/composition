@@ -43,7 +43,7 @@ docker-machine scp start_bot.sh $name:
 docker-machine scp docker_clean.sh $name:
 docker-machine ssh $name "sudo docker stack deploy --compose-file docker-prod.yml $name"
 
-docker-machine scp docker-compose.yml $name:
+docker-machine scp docker-compose-bot.yml $name:docker-compose.yml
 docker-machine ssh $name "sudo apt install docker-compose"
 
 
