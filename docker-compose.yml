@@ -1,31 +1,81 @@
 version: "3"
 services:
-  selenium:
-    image: selenium/standalone-chrome
-    environment:
-      - NODE_MAX_INSTANCES=1
-      - NODE_MAX_SESSION=1
-    ports:
-      - "5900:5900"
-      - "4444:4444"
-    shm_size: 128M
-
-  web:
-    command: ["sh", "./wait-for-selenium.sh", "http://selenium:4444/wd/hub", "--", "python", "docker_quickstart.py"]
-    image: instagramtools/web
-    environment:
-      - PYTHONUNBUFFERED=0
-    depends_on:
-      - selenium
-      - proxy-manager
-    links:
-      - proxy-manager:proxy-manager
+  postgres:
+    image: postgres:11.1-alpine
     volumes:
-      - ./logs:/code/logs
-
-  proxy-manager:
-    image: gott50/proxy-manager
+      - pgs_data:/var/lib/postgresql/data
+    env_file:
+      - .env/.postgres.env
+    ports:
+      - 5432:5432
+  api:
+    image: instagramtools/api
+    depends_on:
+      - postgres
+    links:
+      - postgres:postgres
     environment:
       - DEBUG=False
+      - DB_SERVICE=postgres
+      - DB_PORT=5432
     env_file:
-      - .env/.proxy-manager.env
+      - .env/.postgres.env
+      - .env/.api.env
+  manager:
+    image: instagramtools/manager
+    command: sh wait-for.sh http://api:8000 sh start.sh 8765
+    depends_on:
+      - postgres
+      - api
+    links:
+      - postgres:postgres
+      - api:api
+    environment:
+      - DEBUG=False
+      - DB_SERVICE=postgres
+      - DB_PORT=5432
+      - P_USER=ec2-user
+    env_file:
+      - .env/.postgres.env
+      - .env/.api.env
+      - .env/.manager.env
+      - .env/.bot-manager.env
+
+  nginx:
+    image: instagramtools/user-interface
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DEBUG=off
+    env_file:
+      - .env/.nginx.env
+    depends_on:
+      - api
+      - payment-manager
+      - manager
+    links:
+      - api:api
+      - payment-manager:payment-manager
+      - manager:manager
+
+  payment-manager:
+    image: instagramtools/payment-manager
+    depends_on:
+      - postgres
+      - api
+    links:
+      - postgres:postgres
+      - api:api
+    ports:
+      - "7000:7000"
+    environment:
+      - DEBUG=False
+      - DB_SERVICE=postgres
+      - DB_PORT=5432
+    env_file:
+      - .env/.payment-manager.env
+      - .env/.postgres.env
+
+volumes:
+  pgs_data:
