@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+sudo docker rm /selenium
+sudo docker run -d --net=bridge --name selenium selenium/standalone-chrome:3.141.59
+
 echo Composition Parameters: $@
 INSTA_USER=$2
 
@@ -11,12 +15,8 @@ sudo docker rm /$INSTA_USER
 SETTINGS=${1//' '/''}
 
 NODE=$(sudo docker info | grep "Node Address")
-SELENIUM=${NODE/' Node Address: '/''}
-# 18.196.202.48
-# should be
-# 18.197.130.112
 
-CMD="sudo docker-compose run -d -e SELENIUM=selenium --name $INSTA_USER -e ENV=$SETTINGS -e INSTA_USER=$INSTA_USER -e INSTA_PW=$3 web"
+CMD="sudo docker run -d -net=bridge --link selenium:selenium -e SELENIUM=selenium --name $INSTA_USER -e ENV=$SETTINGS -e INSTA_USER=$INSTA_USER -e INSTA_PW=$3 web"
 echo Composition CMD: $CMD
 
 $CMD
