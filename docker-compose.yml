@@ -21,7 +21,7 @@ services:
     env_file:
       - .env/.postgres.env
       - .env/.api.env
-      - .env/.api_mail.env
+      - .env/.mail.env
   manager:
     image: instagramtools/manager
     command: sh wait-for.sh http://api:8000 sh start.sh 8765
@@ -77,6 +77,15 @@ services:
     env_file:
       - .env/.payment-manager.env
       - .env/.postgres.env
+
+  mailserver:
+    image: gott50/mailserver
+    ports:
+      - "7070:7070"
+    environment:
+      - DEBUG=False
+    env_file:
+      - .env/.mail.env
 
 volumes:
   pgs_data:
