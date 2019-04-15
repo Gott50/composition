@@ -20,7 +20,8 @@ SSH_KEY=${id_rsa//
 /_}
 
 mkdir .env
-echo "SSH_KEY=$SSH_KEY" > .env/.manager.env
+echo "MANAGER_IP=$MANAGER_IP
+SSH_KEY=$SSH_KEY" > .env/.manager.env
 
 echo ".manager.env: $(cat .env/.manager.env)"
 
