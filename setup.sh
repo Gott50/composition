@@ -40,8 +40,7 @@ ENDBACKUP
 docker-machine ssh $name "sudo docker swarm init --advertise-addr $MANAGER_IP"
 docker-machine scp docker-prod.yml $name:
 docker-machine scp -r .env/ $name:
-docker-machine scp start_bot.sh $name:
-docker-machine scp docker_clean.sh $name:
+docker-machine scp scripts $name:
 docker-machine ssh $name "sudo docker stack deploy --compose-file docker-prod.yml $name"
 
 docker-machine scp docker-compose-bot.yml $name:docker-compose.yml
