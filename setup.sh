@@ -31,6 +31,8 @@ docker-machine scp dcp.sh $name:~/backup/
 docker-machine ssh $name <<-'ENDBACKUP'
     DATE=`date '+%Y-%m-%d'`
     CONTAINER=$(sudo docker ps -f NAME=postgres --format 'table {{.ID}}' | grep -v -w CONTAINER)
+    rm -rf backup
+    mkdir backup
     cd backup
     sudo docker exec $CONTAINER pg_dump --dbname=postgres --schema=public --format=t --file=/tmp/pg_dump_$DATE.tar --username=postgres
     sudo ./dcp.sh $CONTAINER:/tmp/pg_dump_$DATE.tar .
