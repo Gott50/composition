@@ -1,4 +1,5 @@
 #!/bin/bash
+apt install jq
 
 # remove exited containers:
 docker ps --filter status=dead --filter status=exited -aq | xargs -r docker rm -v
