@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt autoremove
+echo Y |> sudo apt autoremove
 
 # remove exited containers:
 docker ps --filter status=dead --filter status=exited -aq | xargs -r docker rm -v
