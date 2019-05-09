@@ -9,7 +9,6 @@ MANAGER_IP=$(docker-machine ip $name)
 docker-machine scp docker-prod.yml $name:
 docker-machine scp -r .env/ $name:
 docker-machine scp -r scripts/ $name:
-docker-machine scp docker-compose-bot.yml $name:docker-compose.yml
 
 docker-machine ssh $name <<-'ENDSTART'
     sudo docker swarm init --advertise-addr $MANAGER_IP
