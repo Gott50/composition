@@ -12,12 +12,15 @@ services:
     image: instagramtools/api
     depends_on:
       - postgres
+      - manager
     links:
       - postgres:postgres
+      - manager:manager
     environment:
       - DEBUG=False
       - DB_SERVICE=postgres
       - DB_PORT=5432
+      - APP_BOT_GATEWAY=http://manager:8765
     env_file:
       - .env/.postgres.env
       - .env/.api.env

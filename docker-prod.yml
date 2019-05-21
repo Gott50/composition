@@ -35,6 +35,7 @@ services:
       - DEBUG=False
       - DB_SERVICE=postgres
       - DB_PORT=5432
+      - APP_BOT_GATEWAY=http://manager:8765
       - P_USER=ec2-user
     env_file:
     - .env/.postgres.env
