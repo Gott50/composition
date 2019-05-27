@@ -12,30 +12,30 @@ services:
       image: instagramtools/api
       depends_on:
         - postgres
+        - manager
       links:
         - postgres:postgres
+        - manager:manager
       environment:
         - DEBUG=False
         - DB_SERVICE=postgres
         - DB_PORT=5432
+        - APP_BOT_GATEWAY=http://manager:8765
       env_file:
       - .env/.postgres.env
       - .env/.api.env
       - .env/.mail.env
   manager:
     image: instagramtools/manager
-    command: sh wait-for.sh http://api:8000 sh start.sh 8765
+    command: sh start.sh 8765
     depends_on:
       - postgres
-      - api
     links:
       - postgres:postgres
-      - api:api
     environment:
       - DEBUG=False
       - DB_SERVICE=postgres
       - DB_PORT=5432
-      - APP_BOT_GATEWAY=http://manager:8765
       - P_USER=ec2-user
     env_file:
     - .env/.postgres.env

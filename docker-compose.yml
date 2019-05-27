@@ -27,13 +27,11 @@ services:
       - .env/.mail.env
   manager:
     image: instagramtools/manager
-    command: sh wait-for.sh http://api:8000 sh start.sh 8765
+    command: sh start.sh 8765
     depends_on:
       - postgres
-      - api
     links:
       - postgres:postgres
-      - api:api
     environment:
       - DEBUG=False
       - DB_SERVICE=postgres
