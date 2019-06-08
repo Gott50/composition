@@ -5,6 +5,10 @@ sh backup.sh $@
 name=${@: -1}
 MANAGER_IP=$(docker-machine ip $name)
 
+if [ ! "$MANAGER_IP" ]
+then
+    exit 404
+fi
 
 docker-machine scp docker-prod.yml $name:
 docker-machine scp -r .env/ $name:
