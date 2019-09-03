@@ -4,10 +4,11 @@ services:
     image: postgres:11.1-alpine
     volumes:
       - pgs_data:/var/lib/postgresql/data
-    env_file:
-      - .env/.postgres.env
     ports:
       - 5432:5432
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
   api:
     image: instagramtools/api
     depends_on:
@@ -21,8 +22,10 @@ services:
       - DB_SERVICE=postgres
       - DB_PORT=5432
       - APP_BOT_GATEWAY=http://manager:8765
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
     env_file:
-      - .env/.postgres.env
       - .env/.api.env
       - .env/.mail.env
   manager:
@@ -37,8 +40,10 @@ services:
       - DB_SERVICE=postgres
       - DB_PORT=5432
       - P_USER=ec2-user
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
     env_file:
-      - .env/.postgres.env
       - .env/.api.env
       - .env/.manager.env
       - .env/.bot-manager.env
@@ -80,9 +85,11 @@ services:
       - DEBUG=False
       - DB_SERVICE=postgres
       - DB_PORT=5432
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
     env_file:
       - .env/.payment-manager.env
-      - .env/.postgres.env
 
   mailserver:
     image: gott50/mailserver
