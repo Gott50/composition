@@ -50,8 +50,13 @@ services:
       - "443:443"
     environment:
       - DEBUG=off
-    env_file:
-      - .env/.nginx.env
+      - APP_API_PLACEHOLDER=/api
+      - APP_API_GATEWAY=http://api:8000
+      - APP_BOT_PLACEHOLDER=/bot
+      - APP_BOT_GATEWAY=http://manager:8765
+      - PAYMENT_PLACEHOLDER=/pay
+      - PAYMENT_GATEWAY=http://payment-manager:7000
+
     depends_on:
       - api
       - payment-manager
