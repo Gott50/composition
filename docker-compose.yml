@@ -47,9 +47,6 @@ services:
       - DB_PASS=postgres
       - SECRET_KEY=SECRET_KEY
       - SECURITY_PASSWORD_SALT=SECURITY_PASSWORD_SALT
-    env_file:
-      - .env/.manager.env
-      - .env/.bot-manager.env
 
   nginx:
     image: instagramtools/user-interface
@@ -91,8 +88,7 @@ services:
       - DB_NAME=postgres
       - DB_USER=postgres
       - DB_PASS=postgres
-    env_file:
-      - .env/.payment-manager.env
+      - STRIPE_SECRET_KEY=TEST
 
   mailserver:
     image: gott50/mailserver
