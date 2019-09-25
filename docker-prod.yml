@@ -28,6 +28,8 @@ services:
   manager:
     image: instagramtools/manager
     command: sh start.sh 8765
+    volumes:
+      - /dev/shm:/dev/shm
     depends_on:
       - postgres
     links:
