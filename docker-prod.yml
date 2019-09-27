@@ -28,8 +28,25 @@ services:
   manager:
     image: instagramtools/manager
     command: sh start.sh 8765
-    volumes:
-      - /dev/shm:/dev/shm
+    depends_on:
+      - postgres
+    links:
+      - postgres:postgres
+    environment:
+      - DEBUG=False
+      - DB_SERVICE=postgres
+      - DB_PORT=5432
+      - P_USER=ec2-user
+    env_file:
+    - .env/.postgres.env
+    - .env/.api.env
+    - .env/.manager.env
+    - .env/.bot-manager.env
+
+  starter:
+    image: instagramtools/manager
+    command: python start.py
+    restart: unless-stopped
     depends_on:
       - postgres
     links:
